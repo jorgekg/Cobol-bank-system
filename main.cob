@@ -2,10 +2,10 @@
        PROGRAM-ID. SISTEMBANK.
 
        ENVIRONMENT DIVISION.
-          INPUT-OUTPUT SECTION.
-             FILE-CONTROL.
-             SELECT IN-PUT ASSIGN TO 'input/operation.data'.
-             SELECT OUT-PUT ASSIGN TO 'output/operation.data'.
+           INPUT-OUTPUT SECTION.
+           FILE-CONTROL.
+           SELECT IN-PUT ASSIGN TO 'input/operation.data'.
+           SELECT OUT-PUT ASSIGN TO 'output/operation.data'.
 
        DATA DIVISION.
            FILE SECTION.
@@ -40,4 +40,4 @@
                    END-READ
                END-PERFORM.
            CLOSE IN-PUT.
-       STOP RUN.
+           STOP RUN.
