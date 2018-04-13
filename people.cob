@@ -29,7 +29,7 @@
                05 WS-PEOPLE-IN-NEIGHBORHOOD PIC A(255).
                05 WS-PEOPLE-IN-STREET PIC A(255).
                05 WS-PEOPLE-IN-NUMBER PIC 9(10).
-                      05 WS-PEOPLE-IN-CEP PIC 9(10).
+               05 WS-PEOPLE-IN-CEP PIC 9(10).
                05 WS-PEOPLE-IN-SIGNATURE PIC A(10).
            01 WS-EOF PIC A(1).
 
@@ -44,7 +44,8 @@
                READ PEOPLE-IN INTO WS-PEOPLE-IN
                AT END MOVE 'Y' TO WS-EOF
                    not at end
-                   IF WS-INPUT-SIGNATURE = WS-PEOPLE-IN-SIGNATURE THEN
+                   IF WS-INPUT-SIGNATURE <> WS-PEOPLE-IN-SIGNATURE THEN
+                       DISPLAY 'CALL'
                        CALL 'PEOPLESAVE' USING BY CONTENT WS-PEOPLE-IN
                    END-IF
                    END-READ
