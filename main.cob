@@ -32,10 +32,10 @@
                        AT END MOVE 'Y' TO WS-EOF
                        not at end
                        IF WS-INPUT-OPERATION-ID = 1 THEN
-                           CALL 'PEOPLE' USING BY CONTENT WS-INPUT
+                          CALL 'PEOPLE' USING BY CONTENT WS-INPUT
                        END-IF
                        IF WS-INPUT-OPERATION-ID = 2 THEN
-                           DISPLAY 'CONTA'
+                          CALL 'PEOPLEACCOUNT' USING BY CONTENT WS-INPUT
                        END-IF
                    END-READ
                END-PERFORM.
