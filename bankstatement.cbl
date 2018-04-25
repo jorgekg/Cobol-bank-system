@@ -10,7 +10,8 @@
            INPUT-OUTPUT SECTION.
                FILE-CONTROL.
                     SELECT STATEMENT-IN ASSIGN TO 'input/statement.data'
-                    ORGANIZATION IS SEQUENTIAL.
+                    ORGANIZATION IS INDEXED
+                    ACCESS IS RANDOM.
 
        DATA DIVISION.
 
