@@ -45,11 +45,9 @@
                AT END MOVE 'Y' TO WS-EOF
                    not at end
                    IF WS-INPUT-SIGNATURE <> WS-PEOPLE-IN-SIGNATURE THEN
-                       DISPLAY 'CALL'
                        CALL 'PEOPLESAVE' USING BY CONTENT WS-PEOPLE-IN
                    END-IF
                    END-READ
                END-PERFORM.
            CLOSE PEOPLE-IN.
-           DISPLAY 'Operacao para a sessao: 'WS-INPUT-SIGNATURE.
            goback.

@@ -18,7 +18,7 @@
              SELECT ACCOUNT-IN ASSIGN TO 'input/account.data'.
              SELECT ACCOUNT ASSIGN TO 'storage/account.data'
              ORGANIZATION IS INDEXED
-             ACCESS IS DYNAMIC
+             ACCESS IS RANDOM
              RECORD KEY IS ACCOUNT-ID
              FILE STATUS IS FS.
 
