@@ -1,0 +1,81 @@
+
+.jumbotron {
+    text-align: center;
+    width: 30rem;
+    border-radius: 0.5rem;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    margin: 4rem auto;
+    background-color: #fff;
+    padding: 2rem;
+}
+
+.fa-credit-card {
+    font-size: 7rem;
+    color: #ecf2f4;
+}
+
+input {
+    width: 100%;
+    margin-bottom: 1.4rem;
+    padding: 1rem;
+    background-color: #ecf2f4;
+    border-radius: 0.2rem;
+    border: none;
+}
+h2 {
+    margin-top: 2rem;
+    font-weight: bold;
+    color: #ababab;
+    font-size: 3rem;
+}
+.btn {
+    border-radius: 0.2rem;
+}
+.btn i {
+    font-size: 1.5rem;
+    color: #fff;
+}
+.full-width {
+    background-color: #8eb5e2;
+    width: 100%;
+    -webkit-border-top-right-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+    -moz-border-radius-topright: 0;
+    -moz-border-radius-bottomright: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 3rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+
+.loader{
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.7);
+    position: absolute;
+    z-index: 99999;
+}
+
+.loader img{
+    width: 150px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.hidden{
+    display: none;
+}
