@@ -79,3 +79,9 @@ h2 {
 .hidden{
     display: none;
 }
+
+.btn-primary{
+    background-color: #8eb5e2!important;
+    color: #fff;
+    border-color: #8eb5e2!important;
+}

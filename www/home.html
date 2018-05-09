@@ -7,22 +7,24 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Início <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#" onclick="inicio()">Início <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Saldo</a>
+                <a class="nav-link" href="#" onclick="saldo()">Saldo</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Saque</a>
+                <a class="nav-link" href="#" onclick="saque()">Saque</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Depósito</a>
+                <a class="nav-link" href="#" onclick="deposito()">Depósito</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Emprestimo</a>
+                <a class="nav-link" href="#" onclick="emprestimo()">Emprestimo</a>
             </li>
         </ul>
     </div>
 </nav>
-<h2 style=" font-size: 2rem" align="center">Bem vindo <span id="User">user</span></h2>
-<center><span style="font-size: 15rem; text-align: center; margin-top: 1rem" class="fas fa-credit-card"></span></center>
+<div id="content">
+    <p style="font-size: 80px; color: #ababab; margin-top: 8%;" align="center">Bem vindo {{user}}</p>
+    <center><span style="color: #8eb5e2;font-size: 15rem; text-align: center; margin-top: 1rem" class="fas fa-credit-card"></span></center>
+</div>

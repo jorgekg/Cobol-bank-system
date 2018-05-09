@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
 </head>
-<body onload="loader()">
+<body onload="loader()" >
 <div class="loader">
     <img src="img/loader.gif">
 </div>
-<div id="page" style="width: 100%">
+<div id="page" style="width: 100%;">
     <form action="#" method="post" id="frmlogin" autocomplete="off">
         <div class="jumbotron">
             <div class="container">
@@ -39,7 +39,6 @@
         }
     }
     $(document).ready(function () {
-        home();
         $('#frmlogin').submit(function () {
             loader();
             submit(this)
@@ -47,7 +46,6 @@
         })
     })
     function home(){
-        loader();
         $('#page').load('home.html',function ( response, status, xhr) {
             loader();
         });
@@ -55,6 +53,34 @@
     function submit(pthis){
         var ser = $(pthis).serialize();
         home();
+    }
+    function inicio(){
+        loader();
+        home();
+    }
+    function saldo(){
+        loader();
+        $('#content').load('saldo.html',function ( response, status, xhr) {
+            loader();
+        });
+    }
+    function deposito(){
+        loader();
+        $('#content').load('deposito.html',function ( response, status, xhr) {
+            loader();
+        });
+    }
+    function saque(){
+        loader();
+        $('#content').load('sacar.html',function ( response, status, xhr) {
+            loader();
+        });
+    }
+    function emprestimo(){
+        loader();
+        $('#content').load('emprestimo.html',function ( response, status, xhr) {
+            loader();
+        });
     }
 </script>
 
