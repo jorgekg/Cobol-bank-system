@@ -12,18 +12,18 @@
     <img src="img/loader.gif">
 </div>
 <div id="page" style="width: 100%;">
-    <form action="#" method="post" id="frmlogin" autocomplete="off">
+    <form action="#" method="post" id="frmCad" autocomplete="off">
         <div class="jumbotron">
             <div class="container">
-                <span class="fas fa-credit-card"></span>
-                <br>
-                <h2>System Bank</h2>
                 <div class="box">
-                    <input type="text" name="user" placeholder="Conta do cliente" required>
-                    <input type="password" name="pass" placeholder="senha do cliente" required>
+                    <input type="text" name="nmCliente" placeholder="Nome do cliente" required>
+                    <input type="text" name="nrCpf" placeholder="CPF do cliente" required>
+                    <input type="text" name="nrTelefone" placeholder="Telefone do cliente" required>
+                    <input type="text" name="dsSenha" max="8" placeholder="Senha do cliente" required>
+
                     <button type="submit" class="btn btn-default full-width"><i  class="fas fa-check"></i></button>
                     <br><br>
-                    <a href="conta.html">Criar conta</a>
+                    <a href="index.html">Voltar</a>
                 </div>
             </div>
         </div>
@@ -33,6 +33,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 <script>
+
     function loader(){
         if($('.loader').hasClass('hidden')){
             $('.loader').removeClass('hidden');
@@ -41,50 +42,14 @@
         }
     }
     $(document).ready(function () {
-        $('#frmlogin').submit(function () {
-            loader();
-            submit(this)
+        $('#frmCad').submit(function () {
+            $.ajax({
+                url:"SystemBank.svc/CadPessoa",
+                type: "post",
+                contentType: 'application/json',
+                data: JSON.stringify($('#frmCad').serialize())
+            })
             return false;
         })
     })
-    function home(){
-        $('#page').load('home.html',function ( response, status, xhr) {
-            loader();
-        });
-    }
-    function submit(pthis){
-        var ser = $(pthis).serialize();
-        home();
-    }
-    function inicio(){
-        loader();
-        home();
-    }
-    function saldo(){
-        loader();
-        $('#content').load('saldo.html',function ( response, status, xhr) {
-            loader();
-        });
-    }
-    function deposito(){
-        loader();
-        $('#content').load('deposito.html',function ( response, status, xhr) {
-            loader();
-        });
-    }
-    function saque(){
-        loader();
-        $('#content').load('sacar.html',function ( response, status, xhr) {
-            loader();
-        });
-    }
-    function emprestimo(){
-        loader();
-        $('#content').load('emprestimo.html',function ( response, status, xhr) {
-            loader();
-        });
-    }
 </script>
-
-</body>
-</html>

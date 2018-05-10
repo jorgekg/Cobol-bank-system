@@ -13,6 +13,7 @@
     padding: 2rem;
 }
 
+
 .fa-credit-card {
     font-size: 7rem;
     color: #ecf2f4;
@@ -84,4 +85,13 @@ h2 {
     background-color: #8eb5e2!important;
     color: #fff;
     border-color: #8eb5e2!important;
+}
+
+@media (max-width: 600px) {
+    .jumbotron {
+        width: 100%;
+    }
+    .jumbotron h2{
+        font-size: 22px;
+    }
 }
