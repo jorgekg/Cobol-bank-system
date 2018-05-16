@@ -12,17 +12,16 @@
            FD IN-PUT.
            01 IN-PUT-FILE.
                05 DATA-INPUT-OPERATION-ID PIC 9(5).
-               05 DATA-INPUT-SIGNATURE PIC A(10).
+
            FD OUT-PUT.
            01 OUT-PUT-FILE.
                05 DATA-OUTPUT-STATUS PIC A(3).
                05 DATA-OUTPUT-SERVICE PIC A(3).
-               05 DATA-OUTPUT-SIGNATURE PIC A(10).
 
            WORKING-STORAGE SECTION.
            01 WS-INPUT.
                05 WS-INPUT-OPERATION-ID PIC 9(5).
-               05 WS-INPUT-SIGNATURE PIC A(10).
+
            01 WS-EOF PIC A(1).
 
        PROCEDURE DIVISION.
