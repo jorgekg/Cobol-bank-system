@@ -30,11 +30,15 @@
                    READ IN-PUT INTO WS-INPUT
                        AT END MOVE 'Y' TO WS-EOF
                        not at end
+                       display WS-INPUT-OPERATION-ID
                        IF WS-INPUT-OPERATION-ID = 1 THEN
                           CALL 'PEOPLE' USING BY CONTENT WS-INPUT
                        END-IF
                        IF WS-INPUT-OPERATION-ID = 2 THEN
                           CALL 'PEOPLEACCOUNT' USING BY CONTENT WS-INPUT
+                       END-IF
+                       IF WS-INPUT-OPERATION-ID = 3 THEN
+                           CALL "PEOPLEGET"
                        END-IF
                    END-READ
                END-PERFORM.
