@@ -4,3 +4,9 @@ C:\Users\jorge\Documents\cobol\cobol\server\ServiceSystemBanck\WcfService1\bin\W
 C:\Users\jorge\Documents\cobol\cobol\server\ServiceSystemBanck\WcfService1\obj\Debug\WcfService.csprojResolveAssemblyReference.cache
 C:\Users\jorge\Documents\cobol\cobol\server\ServiceSystemBanck\WcfService1\obj\Debug\WcfService1.dll
 C:\Users\jorge\Documents\cobol\cobol\server\ServiceSystemBanck\WcfService1\obj\Debug\WcfService1.pdb
+C:\cobol\server\ServiceSystemBanck\WcfService1\bin\WcfService1.dll.config
+C:\cobol\server\ServiceSystemBanck\WcfService1\bin\WcfService1.dll
+C:\cobol\server\ServiceSystemBanck\WcfService1\bin\WcfService1.pdb
+C:\cobol\server\ServiceSystemBanck\WcfService1\obj\Debug\WcfService.csprojResolveAssemblyReference.cache
+C:\cobol\server\ServiceSystemBanck\WcfService1\obj\Debug\WcfService1.dll
+C:\cobol\server\ServiceSystemBanck\WcfService1\obj\Debug\WcfService1.pdb

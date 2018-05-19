@@ -7,48 +7,155 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 using WcfService1.app;
 
-namespace WcfService1
+namespace WcfPeople
 {
-    // OBSERVAÇÃO: Você pode usar o comando "Renomear" no menu "Refatorar" para alterar o nome da classe "Service1" no arquivo de código, svc e configuração ao mesmo tempo.
-    // OBSERVAÇÃO: Para iniciar o cliente de teste do WCF para testar esse serviço, selecione Service1.svc ou Service1.svc.cs no Gerenciador de Soluções e inicie a depuração.
     public class PeopleGet : People
     {
+        public string cadastrarCliente(string xml)
+        {
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(PeopleModel));
+
+                var people = new PeopleModel();
+                using (TextReader reader = new StringReader(xml))
+                {
+                    people = (PeopleModel)serializer.Deserialize(reader);
+                }
+
+                using (var file =
+                new StreamWriter(@"C:\cobol\bin\input\operation.data"))
+                {
+                    file.Write(Parametros.API_SERVICO_CLIENTE_CADASTRO);
+                    file.Flush();
+                }
+
+                using (var file =
+                new StreamWriter(@"C:\cobol\bin\input\people.data"))
+                {
+                    file.Write(people.ToString());
+                    file.Flush();
+                }
+
+                using (var file =
+                new StreamWriter(@"C:\cobol\bin\output\people.data"))
+                {
+                    file.Write("");
+                    file.Flush();
+                }
+
+                var start = Process.Start(@"C:\cobol\bin\SystemBank.bat");
+                start.WaitForExit();
+
+                var ret = "";
+                using (var file =
+                new StreamReader(@"C:\cobol\bin\output\people.data"))
+                {
+                    ret = file.ReadLine();
+                }
+
+                return ret.Equals("1") ? "S" : "N";
+            }
+            catch (Exception e)
+            {
+                return "N";
+            }
+        }
+
         public string isCpfExists(string value)
         {
-            using (var file =
-            new StreamWriter(@"C:\Users\jorge\Documents\cobol\cobol\bin\input\operation.data"))
+            try
             {
-                file.WriteLine(Parametros.API_SERVICO_USUARIO_VALIDACAO);
-                file.Flush();
-            }
+                using (var file =
+                new StreamWriter(@"C:\cobol\bin\input\operation.data"))
+                {
+                    file.Write(Parametros.API_SERVICO_USUARIO_VALIDACAO);
+                    file.Flush();
+                }
 
-            using (var file =
-            new StreamWriter(@"C:\Users\jorge\Documents\cobol\cobol\bin\input\cpfexists.data"))
+                using (var file =
+                new StreamWriter(@"C:\cobol\bin\input\cpfexists.data"))
+                {
+                    file.Write(value);
+                    file.Flush();
+                }
+
+                using (var file =
+                new StreamWriter(@"C:\cobol\bin\output\cpfexists.data"))
+                {
+                    file.Write("");
+                    file.Flush();
+                }
+                var start = Process.Start(@"C:\cobol\bin\SystemBank.bat");
+                start.WaitForExit();
+
+                var ret = "";
+
+                using (var file =
+                new StreamReader(@"C:\cobol\bin\output\cpfexists.data"))
+                {
+                    ret = file.ReadLine();
+                }
+
+                return ret.Equals("1") ? "S" : "N";
+            }catch(Exception e)
             {
-                file.WriteLine(value);
-                file.Flush();
+                return "S";
             }
+        }
 
-            using (var file =
-            new StreamWriter(@"C:\Users\jorge\Documents\cobol\cobol\bin\output\cpfexists.data"))
+        public string isCpfSenhaAceitos(string xml)
+        {
+            try
             {
-                file.WriteLine("");
-                file.Flush();
-            }
+                XmlSerializer serializer = new XmlSerializer(typeof(PeopleModel));
 
-            Process myProcess = Process.Start(@"main.exe");
-            myProcess.WaitForExit();
+                var people = new PeopleModel();
+                using (TextReader reader = new StringReader(xml))
+                {
+                    people = (PeopleModel)serializer.Deserialize(reader);
+                }
+                var start = Process.Start(@"C:\cobol\bin\SystemBank.bat");
+                start.WaitForExit();
 
-            var ret = "";
-            using (var file =
-            new StreamReader(@"C:\Users\jorge\Documents\cobol\cobol\bin\output\cpfexists.data"))
+                return null;
+            }catch(Exception e)
             {
-                ret = file.ReadLine();
+                return "N";
             }
+        }
 
-            return ret.Equals("1") ? "S" : "N";
+        
+    }
+
+    [Serializable()]
+    public class PeopleModel
+    {
+        [XmlElement("cpf")]
+        public string cpf { get; set; }
+
+        [XmlElement("senha")]
+        public string senha { get; set; }
+
+        [XmlElement("nome")]
+        public string nome { get; set; }
+
+        [XmlElement("telefone")]
+        public string telefone { get; set; }
+
+        public override string ToString()
+        {
+            return validarStr(nome, 255)+validarStr(cpf,11)+validarStr(telefone,10)+validarStr(senha,8);
+        }
+
+        private string validarStr(string str, int qtdEmbranco)
+        {
+            var branco = qtdEmbranco - str.Length;
+            return str + new string(' ', branco);
         }
     }
 }
