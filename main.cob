@@ -38,11 +38,13 @@
                           CALL 'PEOPLEACCOUNT' USING BY CONTENT WS-INPUT
                        END-IF
                        IF WS-INPUT-OPERATION-ID = 3 THEN
-                           DISPLAY 'VALIDAR LOGIN'
                            CALL "PEOPLEGET"
                        END-IF
                        IF WS-INPUT-OPERATION-ID = 4 THEN
                            DISPLAY "VALIDAR LOGIN E SENHA"
+                       END-IF
+                       IF WS-INPUT-OPERATION-ID = 5 THEN
+                           CALL "PEOPLENAME"
                        END-IF
                    END-READ
                END-PERFORM.

@@ -1,11 +1,11 @@
        IDENTIFICATION DIVISION.
-       PROGRAM-ID. PEOPLELOGIN.
+       PROGRAM-ID. PEOPLENAME.
 
        ENVIRONMENT DIVISION.
            INPUT-OUTPUT SECTION.
              FILE-CONTROL.
-             SELECT EXISTS-RW ASSIGN TO 'output/people.data'.
-             SELECT IN-PUT ASSIGN TO 'input/cpfexists.data'.
+             SELECT EXISTS-RW ASSIGN TO 'output/name.data'.
+             SELECT IN-PUT ASSIGN TO 'input/name.data'.
              SELECT PEOPLE-RW ASSIGN TO 'storage/people.data'
              ORGANIZATION IS INDEXED
              ACCESS IS RANDOM
@@ -17,7 +17,7 @@
            FILE SECTION.
            FD EXISTS-RW.
            01 EXISTS-RW-FILE.
-               05 EXISTS-RW-ERROR PIC A(1).
+               05 EXISTS-RW-NAME PIC A(255).
 
            FD IN-PUT.
            01 IN-PUT-FILE.
@@ -42,7 +42,7 @@
                05 WS-PEOPLE-FILE-IN-TELEFONE PIC A(10).
                05 WS-PEOPLE-FILE-IN-SENHA PIC A(8).
            01 WS-EOF PIC A(1).
-           01 WS-EXSIST PIC A(1).
+           01 WS-Nome PIC A(255).
            01 WS-CPF PIC A(11).
            01 FS PIC 9(10) USAGE NATIONAL.
 
@@ -54,23 +54,21 @@
                    AT END MOVE 'Y' TO WS-EOF
                        not at end
                        MOVE WS-INPUT-CPF TO WS-CPF
-                       DISPLAY 'AQUI'
                    END-READ
                END-PERFORM.
            CLOSE IN-PUT.
            DISPLAY WS-CPF
            OPEN I-O PEOPLE-RW
                MOVE WS-CPF TO PEOPLE-RW-CPF
-               READ PEOPLE-RW INTO WS-PEOPLE-FILE-IN
+               READ PEOPLE-RW into WS-PEOPLE-FILE-IN
                    KEY IS PEOPLE-RW-CPF
-                   INVALID KEY MOVE "0" TO WS-EXSIST
-                   NOT INVALID KEY
-                   MOVE "1" TO WS-EXSIST
+                   INVALID KEY MOVE "" TO WS-Nome
+                  NOT INVALID KEY MOVE WS-PEOPLE-FILE-IN-NAME TO WS-Nome
                END-READ
            CLOSE PEOPLE-RW.
-           DISPLAY WS-EXSIST
+           DISPLAY WS-Nome
            OPEN EXTEND EXISTS-RW.
-               MOVE WS-EXSIST TO EXISTS-RW-ERROR
+               MOVE WS-Nome TO EXISTS-RW-NAME
                WRITE EXISTS-RW-FILE
                END-WRITE.
            CLOSE EXISTS-RW.

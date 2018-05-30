@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="app\Parametros.cs" />
+    <Compile Include="app\PeopleController.cs" />
     <Compile Include="IService1.cs" />
     <Compile Include="People.svc.cs">
       <DependentUpon>People.svc</DependentUpon>

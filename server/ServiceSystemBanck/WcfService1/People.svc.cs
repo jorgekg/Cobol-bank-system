@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.Web;
-using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using WcfService1.app;
@@ -66,6 +60,50 @@ namespace WcfPeople
             }
         }
 
+        public string getNomeCliente(string cpf)
+        {
+            try
+            {
+                using (var file =
+                new StreamWriter(@"C:\cobol\bin\input\operation.data"))
+                {
+                    file.Write(Parametros.API_SERVICO_NOME_CLIENTE);
+                    file.Flush();
+                }
+
+                using (var file =
+                new StreamWriter(@"C:\cobol\bin\input\name.data"))
+                {
+                    file.Write(cpf);
+                    file.Flush();
+                }
+
+                using (var file =
+                new StreamWriter(@"C:\cobol\bin\output\name.data"))
+                {
+                    file.Write("");
+                    file.Flush();
+                }
+
+                var start = Process.Start(@"C:\cobol\bin\SystemBank.bat");
+                start.WaitForExit();
+
+                var ret = "";
+
+                using (var file =
+                new StreamReader(@"C:\cobol\bin\output\name.data"))
+                {
+                    ret = file.ReadLine();
+                }
+
+                return ret;
+            }
+            catch (Exception e)
+            {
+                return "";
+            }
+        }
+
         public string isCpfExists(string value)
         {
             try
@@ -104,7 +142,7 @@ namespace WcfPeople
                 return ret.Equals("1") ? "S" : "N";
             }catch(Exception e)
             {
-                return "S";
+                return "N";
             }
         }
 
@@ -119,13 +157,43 @@ namespace WcfPeople
                 {
                     people = (PeopleModel)serializer.Deserialize(reader);
                 }
+
+                using (var file =
+                new StreamWriter(@"C:\cobol\bin\input\operation.data"))
+                {
+                    file.Write(Parametros.API_SERVICO_USUARIO_VALIDACAO);
+                    file.Flush();
+                }
+
+                using (var file =
+                new StreamWriter(@"C:\cobol\bin\input\cpfexists.data"))
+                {
+                    file.Write(people.cpf);
+                    file.Flush();
+                }
+
+                using (var file =
+                new StreamWriter(@"C:\cobol\bin\output\cpfexists.data"))
+                {
+                    file.Write("");
+                    file.Flush();
+                }
                 var start = Process.Start(@"C:\cobol\bin\SystemBank.bat");
                 start.WaitForExit();
 
-                return null;
-            }catch(Exception e)
+                var ret = "";
+
+                using (var file =
+                new StreamReader(@"C:\cobol\bin\output\cpfexists.data"))
+                {
+                    ret = file.ReadLine();
+                }
+
+                return ret.Equals("1") ? "S" : "N";
+            }
+            catch (Exception e)
             {
-                return "N";
+                return "S";
             }
         }
 

@@ -12,7 +12,7 @@ namespace UnitTestProject1
         public void TestMethod1()
         {
             People p = new PeopleGet();
-            p.isCpfExists("08766825903");
+            var ret = p.isCpfExists("08766825903");
         }
 
         [TestMethod]
@@ -35,6 +35,13 @@ namespace UnitTestProject1
                 "<telefone>33325019</telefone>" +
                 "<nome>Jorge</nome></PeopleModel>";
             p.cadastrarCliente(xml);
+        }
+
+        [TestMethod]
+        public void Nome()
+        {
+            People p = new PeopleGet();
+            p.getNomeCliente("08766825903");
         }
     }
 }
