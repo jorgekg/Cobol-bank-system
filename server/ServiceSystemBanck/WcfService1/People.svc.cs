@@ -148,6 +148,12 @@ namespace WcfPeople
 
         public string isCpfSenhaAceitos(string xml)
         {
+
+            if (string.IsNullOrEmpty(xml))
+            {
+                return "N";
+            }
+
             try
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(PeopleModel));
@@ -193,7 +199,7 @@ namespace WcfPeople
             }
             catch (Exception e)
             {
-                return "S";
+                return e.Message;
             }
         }
 

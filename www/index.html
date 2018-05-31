@@ -13,16 +13,19 @@
 </div>
 <div id="page" style="width: 100%;">
     <form action="#" method="post" id="frmlogin" autocomplete="off">
+        <input type="hidden" name="idAcao" value="1">
         <div class="jumbotron">
             <div class="container">
                 <span class="fas fa-credit-card"></span>
                 <br>
                 <h2>System Bank</h2>
                 <div class="box">
-                    <input type="text" name="user" placeholder="Conta do cliente" required>
-                    <input type="password" name="pass" placeholder="senha do cliente" required>
+                    <input type="text" name="cpf" placeholder="Conta do cliente" required>
+                    <input type="password" name="senha" placeholder="senha do cliente" required>
                     <button type="submit" class="btn btn-default full-width"><i  class="fas fa-check"></i></button>
-                    <br><br>
+                    <br>
+                    <br>
+                    <p id="error" style="color: red; display: none">Erro ao fazer login</p>
                     <a href="conta.html">Criar conta</a>
                 </div>
             </div>
@@ -41,20 +44,73 @@
         }
     }
     $(document).ready(function () {
+        isSessao();
         $('#frmlogin').submit(function () {
             loader();
             submit(this)
             return false;
         })
     })
+    
+    function isSessao(){
+        $.ajax({
+            url :"PHP/controller/PeopleController.php",
+            type :"post",
+            dataType : "json",
+            error:function(){
+                alert("Ocorreu um erro não esperado");
+            },
+            success : function (ret) {
+                if(!ret.noSession){
+                    loader();
+                    home();
+                }
+            }
+        })
+    }
+    
     function home(){
         $('#page').load('home.html',function ( response, status, xhr) {
             loader();
+            getNomeCliente()
         });
     }
+    function getNomeCliente(){
+        $.ajax({
+            url :"PHP/controller/PeopleController.php",
+            type :"post",
+            dataType : "json",
+            data : {idAcao : 2},
+            error:function(){
+                alert("Ocorreu um erro não esperado");
+            },
+            success : function (ret) {
+                if(!ret.error){
+                    $('#name').html("Ocorreu um erro");
+                }
+                $('#name').html(ret.name)
+            }
+        })
+    }
     function submit(pthis){
-        var ser = $(pthis).serialize();
-        home();
+        var data = $(pthis).serialize();
+        $.ajax({
+            url :"PHP/controller/PeopleController.php",
+            type :"post",
+            dataType : "json",
+            data : data,
+            error:function(){
+                alert("Ocorreu um erro não esperado");
+            },
+            success : function (ret) {
+                if(ret.error){
+                    $('#error').css("display","block").html(ret.error);
+                    loader();
+                }else{
+                    home();
+                }
+            }
+        })
     }
     function inicio(){
         loader();
